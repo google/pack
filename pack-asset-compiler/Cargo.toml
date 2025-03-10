@@ -1,0 +1,12 @@
+[package]
+name = "pack-asset-compiler"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+pack-common = { path = "../pack-common" }
+deku = "0.18.1"
+xml = "0.8.20"
+phf = { version = "0.11.2", features = ["macros"] }

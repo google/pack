@@ -1,0 +1,12 @@
+[package]
+name = "pack-common"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+deku = "0.18.1"
+xml = "0.8.20"
+zip = { version = "2.2.0", default-features = false, features = ["deflate"] }
+pem = "3.0.4"
+rsa = "0.9.6"
+rasn = "0.22.0"

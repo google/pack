@@ -1,0 +1,16 @@
+# This is a sample file because your path will differ
+# If you're on macOS, it's usually somewhere under ~/Library/Android
+# Create `.cargo/config.toml` and fill it out if you intend to compile Pack for running on Wear OS
+
+# Real watch
+[target.armv7-linux-androideabi]
+linker = "/path/to/ndk/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi34-clang"
+ar = "/path/to/ndk/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+# Emulator
+[target.i686-linux-android]
+linker = "/path/to/ndk/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android34-clang"
+ar = "/path/to/ndk/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+# Emulator on Apple Silicon MacBooks
+[target.aarch64-linux-android]
+linker = "/path/to/ndk/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android34-clang"
+ar = "/path/to/ndk/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"

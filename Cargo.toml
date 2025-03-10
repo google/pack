@@ -1,0 +1,16 @@
+[workspace]
+resolver = "2"
+members = [
+    "pack-aab",
+    "pack-api",
+    "pack-common",
+    "pack-cli",
+    "pack-common",
+    "pack-sign",
+    "pack-wasm",
+    "pack-zip",
+]
+
+# Web package is built to be small
+[profile.release.package.pack-wasm]
+opt-level = "z"

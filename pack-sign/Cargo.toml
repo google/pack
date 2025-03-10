@@ -1,0 +1,32 @@
+[package]
+name = "pack-sign"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+# This used to be required to build WASM but has mysteriously broken,
+# despite the version of `byteorder` being locked to this version.
+# Curiouser and curiouser.
+# wasm = ["byteorder/js"]
+default = ["cert-gen"]
+cert-gen = ["dep:rcgen", "dep:rand"]
+
+[dependencies]
+pack-common = { path = "../pack-common" }
+pack-zip = { path = "../pack-zip" }
+rsa = { version = "0.9.6", features = ["sha2"] }
+sha2 = { version = "0.10.8", features = ["oid"] }
+deku = "0.18.1"
+byteorder = "1.5.0"
+pem = "3.0.4"
+base64 = "0.22.1"
+rasn-cms = "0.22.0"
+rasn = "0.22.0"
+rasn-pkix = "0.22.0"
+# This is required for randomly generated X.509 Certificates.
+# If you are providing your own certificate to PACK, turn it off.
+# It depends on a lot of crypto code.
+rcgen = { version = "0.13.1", optional = true }
+rand = { version = "0.8.5", optional = true }
