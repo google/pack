@@ -10,7 +10,7 @@ edition = "2021"
 # despite the version of `byteorder` being locked to this version.
 # Curiouser and curiouser.
 # wasm = ["byteorder/js"]
-default = ["cert-gen"]
+default = []
 cert-gen = ["dep:rcgen", "dep:rand"]
 
 [dependencies]

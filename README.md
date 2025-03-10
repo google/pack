@@ -16,7 +16,7 @@ It runs on macOS, Linux, Windows, Android, the Web, or as part of your applicati
   from AOSP code and hex-dumping output from build tools.
 
 Currently, pack is being developed for compiling Wear OS Watch Face Format packages
-in the browser. This is the starting point because they are sets of resources 
+in the browser. This is the starting point because they are sets of resources
 without any compiled Java code in the final APK.
 
 This project provides implementations of Zip alignment, ResChunk XML encoding,
@@ -49,9 +49,8 @@ It is tested to work on recent versions of Chrome, Safari, Edge and Firefox.
 First, compile for web:
 
 ```sh
-$ cd pack-wasm
-$ wasm-pack build --target web
-# Generates ./pkg/pack_wasm.js as well as TypeScript types
+$ wasm-pack build --target web ./pack-wasm
+# Generates ./pack-wasm/pkg/pack_wasm.js as well as TypeScript types
 ```
 
 Which can then be used like so:
@@ -72,6 +71,7 @@ const result_b64 = build({
       contents_b64: "...", // base-64 encoded PNG file
     }
   ],
+  combined_pem_string: "-----BEGIN CERTIFICATE-----...", // A .pem file containing both a CERTIFICATE and a PRIVATE KEY
   generate_aab: false // false for APK, true for AAB
 })
 ```

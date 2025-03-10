@@ -52,7 +52,7 @@ pub fn build(input: JsValue) -> std::result::Result<String, String> {
         })
         .collect::<Result<Vec<_>, String>>()?;
 
-    let signing_keys = Keys::generate_random_testing_keys()?;
+    let signing_keys = Keys::from_combined_pem_string(&input.combined_pem_string)?;
 
     let pkg = Package {
         android_manifest,

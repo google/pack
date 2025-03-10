@@ -28,6 +28,8 @@ pub struct PackWasmResource {
 pub struct PackWasmInput {
     pub resources: Vec<PackWasmResource>,
     pub manifest_b64: String,
+    /// Contents of a `.pem` file containing both a `BEGIN CERTIFICATE` and `BEGIN PRIVATE KEY` section
+    pub combined_pem_string: String,
     /// If `false`: Generates an APK file for local device testing.
     ///
     /// if `true`: Generates an Android App Bundle for Google Play.
