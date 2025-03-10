@@ -29,4 +29,4 @@ rasn-pkix = "0.22.0"
 # If you are providing your own certificate to PACK, turn it off.
 # It depends on a lot of crypto code.
 rcgen = { version = "0.13.2", optional = true }
-rand = { version = "0.8.5", optional = true }
+rand = { version = "0.9.0", optional = true }
