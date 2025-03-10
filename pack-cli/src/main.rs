@@ -46,15 +46,15 @@ fn main() -> Result<()> {
         .ok_or(PackError::Cli("Output APK path not provided".into()))?;
     let out_aab_path = PathBuf::from(&out_apk_path).with_extension("aab");
 
-    let signing_keys = env::args().nth(3).map_or_else(
-        || Keys::generate_random_testing_keys(),
-        |pem_path| {
-            let key_pem_bytes = fs::read(pem_path)?;
-            let key_pem_str = String::from_utf8(key_pem_bytes)
-                .map_err(|_e| PackError::Cli("Key PEM file is not valid UTF-8".into()))?;
-            Keys::from_combined_pem_string(&key_pem_str)
-        }
-    )?;
+    let signing_keys =
+        env::args()
+            .nth(3)
+            .map_or_else(Keys::generate_random_testing_keys, |pem_path| {
+                let key_pem_bytes = fs::read(pem_path)?;
+                let key_pem_str = String::from_utf8(key_pem_bytes)
+                    .map_err(|_e| PackError::Cli("Key PEM file is not valid UTF-8".into()))?;
+                Keys::from_combined_pem_string(&key_pem_str)
+            })?;
 
     let mut in_path = PathBuf::from(&in_dir);
 

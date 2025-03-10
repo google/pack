@@ -45,7 +45,7 @@ impl Keys {
             .clone();
 
         let priv_key_bytes = pem_map.get("PRIVATE KEY").ok_or(PackError::SignerNoKeys)?;
-        let private_key = RsaPrivateKey::from_pkcs8_der(&priv_key_bytes)?;
+        let private_key = RsaPrivateKey::from_pkcs8_der(priv_key_bytes)?;
         let public_key = RsaPublicKey::from(private_key.clone());
 
         Ok(Keys {
