@@ -1,29 +1,33 @@
-# Portable Asset Compiler Kit
+<h1 align="center">Portable Asset Compiler Kit</h1>
 
-PACK is a portable implementation of APK and AAB packaging and signing that runs
-on macOS/Linux/Windows/Android/WASM.
+"pack" can compile and sign APKs and Google Play app bundles wiithout requiring native software
+like Android Studio or the SDK Build Tools.
 
-The project performs jobs which overlap with `aapt2`, `bundletool`, `apksigner`,
-and `zipalign` but with the following, different, goals:
+It runs on macOS, Linux, Windows, Android, the Web, or as part of your application via a library.
 
-- Run on Android devices and the web.
-- Do not depend on a Java runtime, OpenSSL, the Android SDK, or the presence of
+## Goals
+
+- Run on the web, callable from Javascript.
+- Run natively on Android devices.
+- Do not depend at runtime on Java, OpenSSL, the Android SDK, or the presence of
   `android.jar`.
-- Build artifacts in-memory without relying on the presence of a filesystem.
-- Be built only using public information - all format knowledge is reversed
+- Build artifacts in-memory without relying a filesystem.
+- Be written only using public information - all format knowledge is reversed
   from AOSP code and hex-dumping output from build tools.
 
-Currently, PACK is being developed with the goal of compiling Wear OS Watch Face
-Format packages in the browser. This is the starting point because they are sets
-of resources without any compiled Java code in the APK.
+Currently, PACK is being developed for compiling Wear OS Watch Face Format packages
+in the browser. This is the starting point because they are sets of resources 
+without any compiled Java code in the final APK.
 
 This project provides implementations of Zip alignment, ResChunk XML encoding,
 ProtoXML encoding, `resources.arsc` and `resources.pb` encoding, as well as
 JAR Signing and the APK Signature Scheme v2 and v3.
 
-## Usage as a CLI
+## Use
 
-PACK can be used in place of `aapt2` etc. on desktop machines. After cloning the
+<details>
+  <summary><h3>...as a CLI</h3></summary>
+pack can be used in place of `aapt2` etc. on desktop machines. After cloning the
 repo:
 
 ```sh
@@ -31,10 +35,12 @@ $ cargo run -p pack-cli ./watchface watchface.apk
 # Will generate both watchface.apk and watchface.aab.
 # Both will be signed using a built-in testing key/certificate.
 ```
+</details>
 
-## Usage as a Javascript module
+<details>
+  <summary><h3>...as a Javascript module</h3></summary>
 
-PACK can be used on the web to dynamically compile and sign APKs and Android App
+pack can be embedded in a website to dynamically compile and sign APKs and Android App
 Bundles for Google Play without installing native software like Android Studio
 or the Android SDK.
 
@@ -69,10 +75,12 @@ const result_b64 = build({
   generate_aab: false // false for APK, true for AAB
 })
 ```
+</details>
 
-## Usage as a Rust crate
+<details>
+  <summary><h3>...as a Rust crate</h3></summary>
 
-PACK can be used as a Rust library crate.
+pack can be used as a Rust library crate.
 
 ```sh
 $ cargo doc -p pack-api --open
@@ -97,10 +105,12 @@ let apk_bytes = compile_and_sign_apk(pkg, signing_keys)?;
 
 More advanced usage/behaviour can be achieved by depending on the individual
 internal crates such as `pack-asset-compiler`, `pack-sign` and `pack-zip`.
+</details>
 
-## Usage as an on-device compiler for Android
+<details>
+  <summary><h3>...as an on-device compiler for Android</h3></summary>
 
-PACK can be compiled to run _on an Android device_, such as a phone or Wear OS
+pack can be compiled to run _on an Android device_, such as a phone or Wear OS
 watch.
 
 The CLI and library crates can be compiled as-is for Android without changes.
@@ -136,6 +146,8 @@ similar steps but replace `aarch64-linux-android` with
 Similarly, you can create your own crate that depends on `pack-*` packages to
 customise it for your needs, then compile for an Android target tuple, no
 special setup is required.
+
+</details>
 
 ## License
 
