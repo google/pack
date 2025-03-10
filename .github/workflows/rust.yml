@@ -1,0 +1,38 @@
+name: Rust
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install protobuf-compiler
+          cargo install wasm-pack
+      - name: Build
+        run: cargo build
+      - name: Build WASM
+        run: wasm-pack build --target web ./pack-wasm
+      - name: Run clippy
+        run: cargo clippy -- --deny warnings
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nightly Rust
+        run: |
+          rustup install --no-self-update nightly
+          rustup component add --toolchain nightly rustfmt
+      - name: Format Rust code
+        run: cargo +nightly fmt --all -- --check
