@@ -1,4 +1,4 @@
-<h1 align="center">Portable Asset Compiler Kit</h1>
+<h1 align="center"><div>Portable Asset Compiler Kit</div><div>🤖→📦</div></h1>
 
 "pack" can compile and sign APKs and Google Play app bundles without requiring native software
 like Android Studio or the SDK Build Tools.
