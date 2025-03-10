@@ -1,6 +1,6 @@
 <h1 align="center">Portable Asset Compiler Kit</h1>
 
-"pack" can compile and sign APKs and Google Play app bundles wiithout requiring native software
+"pack" can compile and sign APKs and Google Play app bundles without requiring native software
 like Android Studio or the SDK Build Tools.
 
 It runs on macOS, Linux, Windows, Android, the Web, or as part of your application via a library.
@@ -15,7 +15,7 @@ It runs on macOS, Linux, Windows, Android, the Web, or as part of your applicati
 - Be written only using public information - all format knowledge is reversed
   from AOSP code and hex-dumping output from build tools.
 
-Currently, PACK is being developed for compiling Wear OS Watch Face Format packages
+Currently, pack is being developed for compiling Wear OS Watch Face Format packages
 in the browser. This is the starting point because they are sets of resources 
 without any compiled Java code in the final APK.
 
