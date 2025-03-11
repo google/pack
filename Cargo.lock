@@ -923,9 +923,9 @@ dependencies = [
 
 [[package]]
 name = "rasn"
-version = "0.22.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f593394cad523914fcac9296bdb69701ad308589b3ea1e16d37b6f0c3cfad075"
+checksum = "433e096ac40c5aef6c385b46643dc004888db2559a573a70f846451c1bb5acbb"
 dependencies = [
  "bitvec",
  "bitvec-nom2",
@@ -941,13 +941,14 @@ dependencies = [
  "rasn-derive",
  "serde_json",
  "snafu",
+ "xml-no-std",
 ]
 
 [[package]]
 name = "rasn-cms"
-version = "0.22.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eb37ff6be5c94267cb4524dd305458c683b157505d487c6212d3f778ed02fbae"
+checksum = "fa89085ac08bda99a23cd1441b1c54ac4728530b8c58acc368229ac0dee85122"
 dependencies = [
  "rasn",
  "rasn-pkix",
@@ -955,9 +956,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-derive"
-version = "0.22.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f2c367bf1b9a9bc34d40b9c140b52d26b585d0c7755b18496ba061f50639082"
+checksum = "80d1137b96e35fd0486fa121f2cdb854df0ce6a3cc4ae622a93755e4459e675e"
 dependencies = [
  "proc-macro2",
  "rasn-derive-impl",
@@ -966,9 +967,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-derive-impl"
-version = "0.22.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a321099d2f0f08f0afb90e68a16015abea210d4734f7faf6b3497f29feb46a35"
+checksum = "8424d952e29f917320d493a4ae2788dc81d4fc1e932424318c8285e459896b4d"
 dependencies = [
  "either",
  "itertools",
@@ -980,9 +981,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-pkix"
-version = "0.22.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "884db2ae0da3a7239daaec802df74f3431062f85651c511e6c40b35a30282b82"
+checksum = "fa075bfe12fee5ea17e10f0cbe8d78c3d1bd775330d03516f4c7b5619b442cfc"
 dependencies = [
  "rasn",
 ]
@@ -1519,6 +1520,12 @@ checksum = "ede1c99c55b4b3ad0349018ef0eccbe954ce9c342334410707ee87177fcf2ab4"
 dependencies = [
  "xml-rs",
 ]
+
+[[package]]
+name = "xml-no-std"
+version = "0.8.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ac4f451c779ea0b57e28c106c0fdafe9290038c97d26364aeb87617d2b78f698"
 
 [[package]]
 name = "xml-rs"

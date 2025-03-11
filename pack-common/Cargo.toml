@@ -9,4 +9,4 @@ xml = "0.8.20"
 zip = { version = "2.2.3", default-features = false, features = ["deflate"] }
 pem = "3.0.5"
 rsa = "0.9.6"
-rasn = "0.22.0"
+rasn = "0.25.1"
