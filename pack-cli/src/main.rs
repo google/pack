@@ -24,7 +24,7 @@ pub mod res_dir;
 /// ```
 /// $ ls ./watchface
 /// res/ AndroidManifest.xml
-/// $ pack-cli ./watchface ./watchface/package.apk
+/// $ pack-cli ./watchface ./watchface/package
 /// $ ls ./watchface
 /// res/ AndroidManifest.xml package.apk package.aab
 /// ```
@@ -41,10 +41,11 @@ fn main() -> Result<()> {
     let in_dir = env::args()
         .nth(1)
         .ok_or(PackError::Cli("Input directory path not provided".into()))?;
-    let out_apk_path = env::args()
+    let out_path = env::args()
         .nth(2)
         .ok_or(PackError::Cli("Output APK path not provided".into()))?;
-    let out_aab_path = PathBuf::from(&out_apk_path).with_extension("aab");
+    let out_apk_path = PathBuf::from(&out_path).with_extension("apk");
+    let out_aab_path = PathBuf::from(&out_path).with_extension("aab");
 
     let signing_keys =
         env::args()
@@ -72,9 +73,13 @@ fn main() -> Result<()> {
     };
 
     let apk = compile_and_sign_apk(&pkg, &signing_keys)?;
-    fs::write(out_apk_path, apk)?;
+    fs::write(&out_apk_path, apk)?;
+    println!("Wrote {:?} to disk", out_apk_path);
     let aab = compile_and_sign_aab(&pkg, &signing_keys)?;
-    fs::write(out_aab_path, aab)?;
+    fs::write(&out_aab_path, aab)?;
+    println!("Wrote {:?} to disk", out_aab_path);
+
+    println!("Compiled, aligned & signed successfully!");
 
     Ok(())
 }

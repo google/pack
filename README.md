@@ -27,14 +27,17 @@ JAR Signing and the APK Signature Scheme v2 and v3.
 
 <details>
   <summary><h3>...as a CLI</h3></summary>
+
 pack can be used in place of `aapt2` etc. on desktop machines. After cloning the
 repo:
 
 ```sh
-$ cargo run -p pack-cli ./watchface watchface.apk
-# Will generate both watchface.apk and watchface.aab.
-# Both will be signed using a built-in testing key/certificate.
+$ cargo run -p pack-cli ./watchface ./package
+# Will generate both package.apk and package.aab.
+# Both will be signed using a random testing key/certificate.
+# For custom signing, pass a .pem file as a third CLI argument.
 ```
+
 </details>
 
 <details>

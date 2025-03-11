@@ -329,7 +329,8 @@ pub fn xml_to_res_chunk<T: Read + Seek>(
             }
             Ok(XmlEvent::EndDocument) => {}
             Err(e) => return Err(PackError::XmlParsingFailed(e)),
-            _ => println!("Warning: Unknown XML part: {:?}", event.unwrap())
+            // TODO: Don't println from within this library crate, consumers might not want that
+            _ => eprintln!("Warning: Unknown XML part: {:?}", event.unwrap())
         }
     }
 

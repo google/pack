@@ -96,7 +96,8 @@ impl Keys {
         use rcgen::{CertificateParams, DistinguishedName, DnType, KeyPair};
         use rsa::pkcs8::{EncodePrivateKey, LineEnding};
 
-        println!("Warning: Randomly generating a placeholder signing key. This is slow!");
+        eprintln!("Warning: Randomly generating a placeholder signing key. This is slow!");
+        eprintln!("    It's recommended to generate your own keys first and pass them in.");
 
         // Randomly generate an RSA Private Key, derive its Public Key,
         // and prepare it for passing over to the rcgen library.
