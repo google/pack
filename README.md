@@ -155,6 +155,32 @@ special setup is required.
 
 </details>
 
+## Coverage
+
+pack reimplements parts of `aapt2` , `zipalign` , `apksigner` and `bundletool` 
+from scratch, and as such is not fully compatible with all of their features.
+It supports _enough_ to compile basic Wear OS watch faces as a proof of concept,
+and aims to develop further support.
+
+You can help by [contributing](./CONTRIBUTING.md)!
+
+| Original tool | Feature | Supported by pack | Note |
+| ------------- | ------- | ----------------- | ----- |
+| aapt2 | APK Resource tables | ✅ | |
+| aapt2 | APK XML encoding | ✅ | |
+| aapt2 | String tables | ✅ | |
+| aapt2 | Multiple-language values | 🚩 | Only supports single-language `strings.xml` files |
+| aapt2 | Density-dependent resources | 🚩 | Only supports `drawable` (eg. no `drawable-xhdpi`) |
+| zipalign | Zip file 4-byte alignment | ✅ | |
+| apksigner | APK Signature Scheme v1 | ✅ | Required for AAB |
+| apksigner | APK Signature Scheme v2 | ✅ | |
+| apksigner | APK Signature Scheme v3 | ✅ | |
+| apksigner | APK Signature Scheme v4 | 🚩 | Not yet implemented |
+| bundletool | AAB Resource tables | ✅ | |
+| bundletool | AAB XML encoding | ✅ | |
+| bundletool | Resource qualifiers | 🚩 | Same as APK, eg. `values/`, but no `values-b+es/` |
+
+
 ## License
 
 [Apache-2.0](./LICENSE)
