@@ -16,7 +16,7 @@ cert-gen = ["dep:rcgen", "dep:rand"]
 [dependencies]
 pack-common = { path = "../pack-common" }
 pack-zip = { path = "../pack-zip" }
-rsa = { version = "0.9.6", features = ["sha2"] }
+rsa = { version = "0.9.8", features = ["sha2"] }
 sha2 = { version = "0.10.8", features = ["oid"] }
 deku = "0.18.1"
 byteorder = "1.5.0"
