@@ -8,5 +8,5 @@ deku = "0.18.1"
 xml = "0.8.20"
 zip = { version = "2.4.0", default-features = false, features = ["deflate"] }
 pem = "3.0.5"
-rsa = "0.9.6"
+rsa = "0.9.8"
 rasn = "0.25.1"
