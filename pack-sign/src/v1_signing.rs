@@ -17,8 +17,7 @@
 
 use base64::{prelude::BASE64_STANDARD, Engine};
 use pack_common::Result;
-use rasn::types::Integer::Primitive;
-use rasn::types::Oid;
+use rasn::types::{Integer, Oid};
 use rasn::{Decode, Encode};
 use rasn_cms::algorithms::RSA;
 use rasn_cms::ContentInfo;
@@ -70,7 +69,7 @@ fn create_pkcs7_file(sig_file: String, keys: &Keys) -> Result<Vec<u8>> {
     ))?;
 
     let signer_info = SignerInfo {
-        version: Primitive(1),
+        version: Integer::ONE,
         sid: SignerIdentifier::IssuerAndSerialNumber(IssuerAndSerialNumber {
             issuer: cert.tbs_certificate.issuer.clone(),
             serial_number: cert.tbs_certificate.serial_number.clone()
@@ -89,7 +88,7 @@ fn create_pkcs7_file(sig_file: String, keys: &Keys) -> Result<Vec<u8>> {
     };
 
     let signed_data = SignedData {
-        version: Primitive(1),
+        version: Integer::ONE,
         digest_algorithms: vec![rasn_cms::AlgorithmIdentifier {
             algorithm: OID_SHA256.into(),
             parameters: None
