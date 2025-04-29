@@ -2,7 +2,7 @@
 
 This folder contains an Android app that can compile Wear OS watch faces as `.apk` or `.aab` at runtime.
 
-It does so by using a custom Rust library depending on `pack-api`, plus a Java class which interfaces with that library ("PackPackage.java").
+It does so by using a custom Rust library depending on `pack-api`, plus a Java class which interfaces with that library ([PackPackage.java](./PackFromJava/app/src/main/java/com/example/packfromjava/PackPackage.java)).
 
 Note that this example is a phone app, but the concept should work just as well on Wear OS.
 
@@ -28,3 +28,7 @@ You should be presented with a phone activity that says "Compile an APK on-devic
 You can look into `MainActivity.java` for how this package is compiled.
 
 If you need to, you could modify `PackPackage.java` to create a more idiomatic API, but theoretically you could leave it untouched if this example API doesn't bother you.
+
+## Important Note
+
+This is **sample code**, it isn't up to scratch, quality-wise, with the rest of the repo. For example, it does not handle errors. It's intended to give a taste of what it could be like to use Pack on Android. Please modify it to suit your needs.

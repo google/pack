@@ -10,3 +10,5 @@ crate-type = ["dylib"]
 pack-api = { git = "https://github.com/google/pack.git" }
 jni = "0.21.1"
 base64 = "0.22.1"
+
+[workspace]
