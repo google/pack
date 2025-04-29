@@ -206,39 +206,14 @@ dependencies = [
 
 [[package]]
 name = "deku"
-version = "0.18.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9711031e209dc1306d66985363b4397d4c7b911597580340b93c9729b55f6eb"
-dependencies = [
- "bitvec",
- "deku_derive 0.18.1",
- "no_std_io2 0.8.1",
- "rustversion",
-]
-
-[[package]]
-name = "deku"
 version = "0.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0884cacbbfed7294f52619ec9092550a78728ef7bef9ae644dd00750763a4022"
 dependencies = [
  "bitvec",
- "deku_derive 0.19.0",
- "no_std_io2 0.9.0",
+ "deku_derive",
+ "no_std_io2",
  "rustversion",
-]
-
-[[package]]
-name = "deku_derive"
-version = "0.18.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58cb0719583cbe4e81fb40434ace2f0d22ccc3e39a74bb3796c22b451b4f139d"
-dependencies = [
- "darling",
- "proc-macro-crate",
- "proc-macro2",
- "quote",
- "syn",
 ]
 
 [[package]]
@@ -496,15 +471,6 @@ checksum = "defc4c55412d89136f966bbb339008b474350e5e6e78d2714439c386b3137a03"
 
 [[package]]
 name = "no_std_io2"
-version = "0.8.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8a3564ce7035b1e4778d8cb6cacebb5d766b5e8fe5a75b9e441e33fb61a872c6"
-dependencies = [
- "memchr",
-]
-
-[[package]]
-name = "no_std_io2"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3c2b9acd47481ab557a89a5665891be79e43cce8a29ad77aa9419d7be5a7c06a"
@@ -595,7 +561,7 @@ checksum = "1261fe7e33c73b354eab43b1273a57c8f967d0391e80353e51f764ac02cf6775"
 name = "pack-aab"
 version = "0.1.0"
 dependencies = [
- "deku 0.19.0",
+ "deku",
  "pack-asset-compiler",
  "pack-common",
  "pack-zip",
@@ -608,7 +574,7 @@ dependencies = [
 name = "pack-api"
 version = "0.1.0"
 dependencies = [
- "deku 0.19.0",
+ "deku",
  "pack-aab",
  "pack-asset-compiler",
  "pack-common",
@@ -620,7 +586,7 @@ dependencies = [
 name = "pack-asset-compiler"
 version = "0.1.0"
 dependencies = [
- "deku 0.18.1",
+ "deku",
  "pack-common",
  "phf",
  "xml",
@@ -637,7 +603,7 @@ dependencies = [
 name = "pack-common"
 version = "0.1.0"
 dependencies = [
- "deku 0.19.0",
+ "deku",
  "pem",
  "rasn",
  "rsa",
@@ -651,7 +617,7 @@ version = "0.1.0"
 dependencies = [
  "base64",
  "byteorder",
- "deku 0.19.0",
+ "deku",
  "pack-common",
  "pack-zip",
  "pem",
