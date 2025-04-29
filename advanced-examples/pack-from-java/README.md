@@ -6,6 +6,8 @@ It does so by using a custom Rust library depending on `pack-api`, plus a Java c
 
 Note that this example is a phone app, but the concept should work just as well on Wear OS.
 
+![Image showing the app running on an Android phone and its result running on Wear OS](./demo.png)
+
 ## Build steps
 
 Tested on macOS, should work on Linux with minimal modification.
