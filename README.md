@@ -155,9 +155,20 @@ special setup is required.
 
 </details>
 
+<details>
+  <summary><h3>...inside an Android app</h3></summary>
+
+Included in this repo is a full example of an Android Studio project for an
+app which depends on Pack, including boilerplate code for gluing the library
+together with Java, resulting in the ability to runtime-compile APKs.
+
+See [advanced-examples/pack-from-java](./advanced-examples/pack-from-java).
+
+</details>
+
 ## Coverage
 
-pack reimplements parts of `aapt2` , `zipalign` , `apksigner` and `bundletool` 
+pack reimplements parts of `aapt2` , `zipalign` , `apksigner` and `bundletool`
 from scratch, and as such is not fully compatible with all of their features.
 It supports _enough_ to compile basic Wear OS watch faces as a proof of concept,
 and aims to develop further support.

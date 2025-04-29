@@ -1,0 +1,14 @@
+[package]
+name = "pack-java"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["dylib"]
+
+[dependencies]
+pack-api = { git = "https://github.com/google/pack.git" }
+jni = "0.21.1"
+base64 = "0.22.1"
+
+[workspace]
