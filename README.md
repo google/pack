@@ -157,6 +157,13 @@ special setup is required.
 
 <details>
   <summary><h3>...inside an Android app</h3></summary>
+
+Included in this repo is a full example of an Android Studio project for an
+app which depends on Pack, including boilerplate code for gluing the library
+together with Java, resulting in the ability to runtime-compile APKs.
+
+See [advanced-examples/pack-from-java](./advanced-examples/pack-from-java).
+
 </details>
 
 ## Coverage
