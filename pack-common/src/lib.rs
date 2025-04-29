@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use core::fmt;
 use std::{io, num::ParseIntError, rc::Rc};
 
 use deku::prelude::*;
@@ -27,16 +28,17 @@ pub enum PackError {
     /// command line implementation. For example, not enough arguments were
     /// passed via the shell.
     Cli(String),
-    /// The bytes passed in `Package.android_manifest` are not valid UTF-8 or
-    /// do not contain a manifest definition.
-    NotAManifest,
+    /// The bytes passed in `Package.android_manifest` are not valid UTF-8.
+    ManifestIsNotUTF8,
+    /// The AndroidManifest file doesn't contain a "package" attribute.
+    ManifestDoesNotHavePackageName,
     /// PACK only supports UTF-8 encoding for AAPT StringPools. In this format,
     /// string lengths are stored in signed 16-bit integers, meaning the
     /// maximum supported string length is `0x7FFF` bytes.
     StringPoolStringTooLong(String),
     /// Attempted to construct an APK resource table with a package identifier
     /// longer than 128 bytes long.
-    PackageNameTooLong,
+    PackageNameTooLong(String),
     /// When AssetCompiler was trying to serialise a struct similar to AAPT,
     /// something went wrong. See [DekuError].
     ByteSerialisationFailed(DekuError),
@@ -101,10 +103,41 @@ pub enum PackError {
 /// Result type where the error is always [PackError].
 pub type Result<T> = std::result::Result<T, PackError>;
 
+impl fmt::Display for PackError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        use PackError::*;
+        match self {
+            Cli(msg) => write!(f, "{msg}"),
+            ManifestIsNotUTF8 => write!(f, "AndroidManifest.xml file is not valid UTF-8."),
+            ManifestDoesNotHavePackageName => write!(f, "AndroidManifest.xml file does not define a 'package' attribute on its <manifest /> element."),
+            StringPoolStringTooLong(_) => write!(f, "XML file contained a string longer than 32,767 (0x7FFF) characters. Pack does not support arbitrary-size string pools."),
+            PackageNameTooLong(pkg) => write!(f, "Package name \"{pkg}\" is too long. Maximum length is 128 characters."),
+            ByteSerialisationFailed(deku_error) => write!(f, "Failed to get byte representation of an object.\nInternal error: {deku_error:?}"),
+            TooManyUniqueAndroidInternalAttributes => write!(f, "Internal Pack bug: Too many unique Android Internal Attributes. This shouldn't be possible, please file a bug in the Pack repo."),
+            UnknownAndroidInternalAttribute(attr) => write!(f, "Unknown Android Internal Attribute \"{attr}\". This may be because the attribute is not valid, or because Pack is not up-to-date on the latest added attributes. If you believe the latter, please file a bug in the Pack repo."),
+            XmlParsingFailed(xml_error) => write!(f, "XML parsing error.\nInternal error: {xml_error:?}"),
+            IntegerAttributeParsingFailed(err) => write!(f, "Encountered a non-integer value in an attribute that was expected to be an integer.\nInternal error: {err:?}"),
+            ReferenceAttributeParsingFailed(attr) => write!(f, "Failed to parse attribute reference \"{attr}\". Expected a format like \"@drawable/preview\" since the value begins with \"@\"."),
+            ReferenceAttributeLookupFailed(attr) => write!(f, "Failed to lookup attribute reference \"{attr}\". Does it exist in the input files?"),
+            ProtoXmlNodeIsNotAnElement => write!(f, "Internal Pack bug: Failed to cast ProtoXml Node to Element. This shouldn't be possible, please file a bug in the Pack repo."),
+            FileIoError(io_err) => write!(f, "File I/O failed. Did you specify a valid input/output path?\nInternal error: {io_err:?}"),
+            ZipWritingFailed(zip_error) => write!(f, "Failed to create in-memory Zip archive.\nInternal error: {zip_error:?}"),
+            SignerZipParsingFailed => write!(f, "Signer failed to find the Zip End of Central Directory Marker."),
+            SignerPemParsingFailed(pem_error) => write!(f, "A signing .pem was provided, but it didn't parse as valid syntax.\nInternal error: {pem_error:?}"),
+            SignerNoKeys => write!(f, "A signing .pem was provided, but it didn't contain one usable PRIVATE KEY and CERTIFICATE.\nEnsure keys are not protected with passwords, as Pack does not support parsing these. Else, ensure your .pem is formatted correctly so as not to trip up the parser."),
+            SignerRsaPrivateKeyParsingFailed(pkcs_error) => write!(f, "RSA Private Key parsing failed.\nInternal error: {pkcs_error:?}"),
+            SignerRsaSigningFailed(rsa_error) => write!(f, "RSA signing failed.\nInternal error: {rsa_error:?}"),
+            SignerRsaKeySerialisationFailed(pkcs_error) => write!(f, "Failed to serialise RSA key for APK Signing Scheme v1.\nInternal error: {pkcs_error:?}"),
+            SignerCertificateDecodingFailed(decode_error) => write!(f, "Failed to decode certificate from .pem.\nInternal error: {decode_error:?}"),
+            SignerPKCS7EncodingFailed(encode_error) => write!(f, "Failed to write PKCS7 signature for APK Signature Scheme v1.\nInternal error: {encode_error:?}"),
+        }
+    }
+}
+
 /// This makes it easier for Result<Something, PackError> to be returned from WASM functions
 impl From<PackError> for String {
     fn from(value: PackError) -> Self {
-        format!("{:?}", value)
+        format!("{value}")
     }
 }
 
