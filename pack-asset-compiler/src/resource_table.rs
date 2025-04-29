@@ -148,7 +148,7 @@ pub fn construct_resource_table(
 // Returns the package name in zero-padded 128 UTF-16 characters
 fn get_padded_package_name(package_name: &str) -> Result<Vec<u16>> {
     if package_name.len() > 128 {
-        return Err(PackError::PackageNameTooLong);
+        return Err(PackError::PackageNameTooLong(package_name.into()));
     }
     let mut out_vec = vec![0; 128];
     let utf16str: Vec<u16> = package_name.encode_utf16().collect();

@@ -37,13 +37,20 @@ pub mod res_dir;
 ///
 /// Where `keys.pem` is a PEM-format file containing both a `-----BEGIN CERTIFICATE-----`
 /// section and a `-----BEGIN PRIVATE KEY-----` section.
-fn main() -> Result<()> {
+fn main() {
+    let result = pack_main();
+    if let Err(err) = result {
+        eprintln!("Error: {err}");
+    }
+}
+
+fn pack_main() -> Result<()> {
     let in_dir = env::args()
         .nth(1)
-        .ok_or(PackError::Cli("Input directory path not provided".into()))?;
+        .ok_or(PackError::Cli("Input directory path not provided.".into()))?;
     let out_path = env::args()
         .nth(2)
-        .ok_or(PackError::Cli("Output APK path not provided".into()))?;
+        .ok_or(PackError::Cli("Output APK path not provided.".into()))?;
     let out_apk_path = PathBuf::from(&out_path).with_extension("apk");
     let out_aab_path = PathBuf::from(&out_path).with_extension("aab");
 
@@ -53,7 +60,7 @@ fn main() -> Result<()> {
             .map_or_else(Keys::generate_random_testing_keys, |pem_path| {
                 let key_pem_bytes = fs::read(pem_path)?;
                 let key_pem_str = String::from_utf8(key_pem_bytes)
-                    .map_err(|_e| PackError::Cli("Key PEM file is not valid UTF-8".into()))?;
+                    .map_err(|_e| PackError::Cli("Key PEM file is not valid UTF-8.".into()))?;
                 Keys::from_combined_pem_string(&key_pem_str)
             })?;
 
@@ -74,10 +81,10 @@ fn main() -> Result<()> {
 
     let apk = compile_and_sign_apk(&pkg, &signing_keys)?;
     fs::write(&out_apk_path, apk)?;
-    println!("Wrote {:?} to disk", out_apk_path);
+    println!("Wrote {:?} to disk.", out_apk_path);
     let aab = compile_and_sign_aab(&pkg, &signing_keys)?;
     fs::write(&out_aab_path, aab)?;
-    println!("Wrote {:?} to disk", out_aab_path);
+    println!("Wrote {:?} to disk.", out_aab_path);
 
     println!("Compiled, aligned & signed successfully!");
 

@@ -164,7 +164,7 @@ pub fn compile_and_sign_aab(package: &Package, keys: &Keys) -> Result<Vec<u8>> {
         &package_name,
         &label,
         String::from_utf8(package.android_manifest.clone())
-            .map_err(|_e| PackError::NotAManifest)?,
+            .map_err(|_e| PackError::ManifestIsNotUTF8)?,
         &mut resources
     )?;
 
@@ -189,7 +189,9 @@ fn parse_manifest(
     let (manifest_res_chunk, manifest_info) = xml_to_res_chunk(&mut reader, resources)?;
     Ok((
         manifest_res_chunk,
-        manifest_info.package_name.ok_or(PackError::NotAManifest)?,
+        manifest_info
+            .package_name
+            .ok_or(PackError::ManifestDoesNotHavePackageName)?,
         manifest_info.label
     ))
 }
