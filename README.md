@@ -155,9 +155,13 @@ special setup is required.
 
 </details>
 
+<details>
+  <summary><h3>...inside an Android app</h3></summary>
+</details>
+
 ## Coverage
 
-pack reimplements parts of `aapt2` , `zipalign` , `apksigner` and `bundletool` 
+pack reimplements parts of `aapt2` , `zipalign` , `apksigner` and `bundletool`
 from scratch, and as such is not fully compatible with all of their features.
 It supports _enough_ to compile basic Wear OS watch faces as a proof of concept,
 and aims to develop further support.
