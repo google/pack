@@ -884,9 +884,9 @@ dependencies = [
 
 [[package]]
 name = "rasn"
-version = "0.26.3"
+version = "0.26.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e43ccbab32f7753d6df516fd0ddc14bb4b830f8f098067b9c96bc07d9cd7b07e"
+checksum = "2e2bea77f5bbe2c2b3e9b8b5523c04d8e0207c1e2f77978e648142fd01b94ecc"
 dependencies = [
  "bitvec",
  "bitvec-nom2",
@@ -1463,9 +1463,9 @@ dependencies = [
 
 [[package]]
 name = "xml-no-std"
-version = "0.8.19"
+version = "0.8.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac4f451c779ea0b57e28c106c0fdafe9290038c97d26364aeb87617d2b78f698"
+checksum = "cd223bc94c615fc02bf2f4bbc22a4a9bfe489c2add3ec10b1038df3aca44cac7"
 
 [[package]]
 name = "xml-rs"
