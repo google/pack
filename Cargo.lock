@@ -941,9 +941,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-pkix"
-version = "0.26.3"
+version = "0.26.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d31dc9dfb692cc5f33f65271a4b2e99c11022f23994e9c33ea0dec09bae2654"
+checksum = "eca46b29dcd09d0f45d171338c47d69249c2cf1b1d51e879abeccb3c08db3f05"
 dependencies = [
  "rasn",
 ]
