@@ -7,9 +7,9 @@ edition = "2021"
 pack-asset-compiler = { path = "../pack-asset-compiler" }
 pack-common = { path = "../pack-common" }
 pack-zip = { path = "../pack-zip" }
-prost = "0.13.5"
-deku = "0.19.0"
+prost = "0.14.1"
+deku = "0.19.1"
 xml = "0.8.20"
 
 [build-dependencies]
-prost-build = "0.13.5"
+prost-build = "0.14.1"
