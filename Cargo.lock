@@ -116,9 +116,9 @@ dependencies = [
 
 [[package]]
 name = "cfg-if"
-version = "1.0.0"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+checksum = "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268"
 
 [[package]]
 name = "chrono"
@@ -888,13 +888,14 @@ dependencies = [
 
 [[package]]
 name = "rasn"
-version = "0.26.6"
+version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7863f4e3d3cbbe0d3a427aa48447c42b5a74a579cbfa7afa63735b0c10879c44"
+checksum = "39a1c895be4fdfcf5a9163ef000d3f8918ecb7ebb81ccd03fffef6e37c7080f1"
 dependencies = [
  "bitvec",
  "bitvec-nom2",
  "bytes",
+ "cfg-if",
  "chrono",
  "either",
  "nom",
@@ -910,9 +911,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-cms"
-version = "0.26.6"
+version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ffab95fefca87ed16fa9501141bebd99643f51d46c7e19f3c0a2c321ae5c27d2"
+checksum = "3f12fb5d6c77f9b0db135a70e8d0e1a0a95f75e6b08053243d47c1cbdd9bf6b1"
 dependencies = [
  "rasn",
  "rasn-pkix",
@@ -920,9 +921,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-derive"
-version = "0.26.0"
+version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "000ba82171fd5e3838b4d6fb471b9a0aa150d8235c8b6f4f78b9bfc674194789"
+checksum = "bf9723b0a85560548db5711650d32a2f10791addc7e998d3a59bdb2a12088d65"
 dependencies = [
  "proc-macro2",
  "rasn-derive-impl",
@@ -931,9 +932,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-derive-impl"
-version = "0.26.0"
+version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "88c59ce1605b90e1c812dc7a1d15e2c31f1dd5f7ab6e0e870fe21f9819cba620"
+checksum = "713484435a087ea1e2611351bb6e54e755709a37bf45bd8c101052988fe9f39b"
 dependencies = [
  "either",
  "itertools",
@@ -945,9 +946,9 @@ dependencies = [
 
 [[package]]
 name = "rasn-pkix"
-version = "0.26.6"
+version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c902bfc1add6e7471323cdb879fe6a3c3122b1cb0247937c0940b28e2334252"
+checksum = "f08d7b206f3d759d2d2585e25c0117aee7709496387b7a5c9fe56e0dc0abbc98"
 dependencies = [
  "rasn",
 ]
@@ -1515,9 +1516,9 @@ checksum = "ced3678a2879b30306d323f4542626697a464a97c0a07c9aebf7ebca65cd4dde"
 
 [[package]]
 name = "zip"
-version = "4.1.0"
+version = "4.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "af7dcdb4229c0e79c2531a24de7726a0e980417a74fb4d030a35f535665439a0"
+checksum = "95ab361742de920c5535880f89bbd611ee62002bf11341d16a5f057bb8ba6899"
 dependencies = [
  "arbitrary",
  "crc32fast",
