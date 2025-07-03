@@ -22,9 +22,9 @@ deku = "0.19.1"
 byteorder = "1.5.0"
 pem = "3.0.5"
 base64 = "0.22.1"
-rasn-cms = "0.26.6"
-rasn = "0.26.6"
-rasn-pkix = "0.26.6"
+rasn-cms = "0.27.0"
+rasn = "0.27.0"
+rasn-pkix = "0.27.0"
 # This is required for randomly generated X.509 Certificates.
 # If you are providing your own certificate to PACK, turn it off.
 # It depends on a lot of crypto code.
