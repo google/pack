@@ -19,20 +19,15 @@ use crate::resource_external_types::AttributeDataType;
 // See get_internal_attribute_id
 include!(concat!(env!("OUT_DIR"), "/internal_attributes_map.rs"));
 
-// In AAPT2, these are pulled from Android.jar somehow.
-// But we want to run on the web and not require Android.jar.
-// For that reason, these are guessed and added as-and-when needed.
-// In future we could write a script to pull the real values out of Android.jar
-// into a lookup table.
-pub fn internal_attribute_type(attr_name: &str) -> AttributeDataType {
-    match attr_name {
-        "versionCode" |
-        "compileSdkVersion" |
-        "minSdkVersion" |
-        // TODO: This seems questionable. Is it dynamic?
-        "value" => AttributeDataType::DecimalInteger,
-        "hasCode" => AttributeDataType::BooleanInteger,
-        _ => AttributeDataType::String,
+pub fn infer_attribute_type(value: &String) -> AttributeDataType {
+    if value.parse::<u32>().is_ok() {
+        AttributeDataType::DecimalInteger
+    } else if value == "true" || value == "false" {
+        AttributeDataType::BooleanInteger
+    } else if value.starts_with("@") {
+        AttributeDataType::Reference
+    } else {
+        AttributeDataType::String
     }
 }
 

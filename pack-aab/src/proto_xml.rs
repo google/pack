@@ -21,7 +21,7 @@
 use std::{collections::HashSet, io::Read};
 
 use pack_asset_compiler::{
-    internal_android_attributes::{get_internal_attribute_id, internal_attribute_type},
+    internal_android_attributes::{get_internal_attribute_id, infer_attribute_type},
     resource_external_types::AttributeDataType,
     resource_internal_types::Resource,
     xml_file::{lookup_resource_id, ANDROID_INTERNAL_ATTRIBUTE_MAGIC}
@@ -124,7 +124,7 @@ fn parser_attr_to_proto_attr(
     let mut compiled_value: Option<item::Value> = None;
     let resource_id = if p_attr.name.prefix.clone().unwrap_or("".into()) == "android" {
         // This is an internal attribute
-        let attr_type = internal_attribute_type(&p_attr.name.local_name);
+        let attr_type = infer_attribute_type(&p_attr.name.local_name);
         compiled_value = match attr_type {
             AttributeDataType::DecimalInteger => Some(item::Value::Prim(Primitive {
                 oneof_value: Some(primitive::OneofValue::IntDecimalValue(

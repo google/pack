@@ -21,7 +21,7 @@ use std::{
 
 use crate::{
     generate_res_chunk,
-    internal_android_attributes::{get_internal_attribute_id, internal_attribute_type},
+    internal_android_attributes::{get_internal_attribute_id, infer_attribute_type},
     resource_external_types::*,
     resource_internal_types::Resource,
     string_pool::construct_string_pool,
@@ -243,21 +243,9 @@ pub fn xml_to_res_chunk<T: Read + Seek>(
                         manifest_info.label = Some(attr.value.clone());
                     }
 
-                    let mut attr_type = AttributeDataType::String;
-                    if attr.name.local_name == "platformBuildVersionCode"
-                        || attr.name.local_name == "platformBuildVersionName"
-                    {
-                        attr_type = AttributeDataType::DecimalInteger;
-                    }
-                    if attr.value.starts_with("@") {
-                        attr_type = AttributeDataType::Reference;
-                    }
+                    let attr_type = infer_attribute_type(&attr.value);
                     let name_id = if let Some(prefix) = &attr.name.prefix {
                         if prefix == "android" {
-                            // Don't overwrite this in this case
-                            if attr_type != AttributeDataType::Reference {
-                                attr_type = internal_attribute_type(&attr.name.local_name);
-                            }
                             add_or_use_android_string!(attr.name.local_name.clone())
                         } else {
                             add_or_use_string!(attr.name.local_name.clone())
