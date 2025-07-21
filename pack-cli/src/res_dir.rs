@@ -28,7 +28,7 @@ pub fn read_res_dir(res_path: &PathBuf) -> Result<Vec<FileResource>> {
                 }
             }
         }
-        eprintln!("Warning: Ignoring unusable res/ entry {:?}", res_type)
+        eprintln!("Warning: Ignoring unusable res/ entry {res_type:?}")
     }
     Ok(resources)
 }
@@ -38,8 +38,7 @@ fn collect_resources(path: &PathBuf, resources: &mut Vec<FileResource>) {
     let maybe_resource_files = fs::read_dir(path);
     if let Err(err) = maybe_resource_files {
         eprintln!(
-            "Warning: Failed to read res/ subdirectory {} {:?}",
-            res_name, err
+            "Warning: Failed to read res/ subdirectory {res_name} {err:?}"
         );
         return;
     }
@@ -64,8 +63,7 @@ fn collect_resources(path: &PathBuf, resources: &mut Vec<FileResource>) {
             }
         }
         eprintln!(
-            "Warning: Ignoring unusable {} resource entry {:?}",
-            res_name, file
+            "Warning: Ignoring unusable {res_name} resource entry {file:?}"
         )
     }
 }

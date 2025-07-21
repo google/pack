@@ -35,7 +35,7 @@ macro_rules! console_log {
 #[wasm_bindgen]
 pub fn build(input: JsValue) -> std::result::Result<String, String> {
     let input: PackWasmInput = serde_wasm_bindgen::from_value(input)
-        .map_err(|e| format!("JS object input did not match expected format\n{:?}", e))?;
+        .map_err(|e| format!("JS object input did not match expected format\n{e:?}"))?;
 
     let android_manifest = b64_to_bytes(&input.manifest_b64[..])?;
 
@@ -70,7 +70,7 @@ fn b64_to_bytes(b64: &str) -> std::result::Result<Vec<u8>, String> {
     // Slightly unusual API
     general_purpose::STANDARD
         .decode(b64.as_bytes())
-        .map_err(|e| format!("Failed to decode Base64\n{:?}", e))
+        .map_err(|e| format!("Failed to decode Base64\n{e:?}"))
 }
 
 fn bytes_to_b64(bytes: &Vec<u8>) -> String {
