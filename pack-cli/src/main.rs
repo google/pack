@@ -81,10 +81,10 @@ fn pack_main() -> Result<()> {
 
     let apk = compile_and_sign_apk(&pkg, &signing_keys)?;
     fs::write(&out_apk_path, apk)?;
-    println!("Wrote {:?} to disk.", out_apk_path);
+    println!("Wrote {out_apk_path:?} to disk.");
     let aab = compile_and_sign_aab(&pkg, &signing_keys)?;
     fs::write(&out_aab_path, aab)?;
-    println!("Wrote {:?} to disk.", out_aab_path);
+    println!("Wrote {out_aab_path:?} to disk.");
 
     println!("Compiled, aligned & signed successfully!");
 

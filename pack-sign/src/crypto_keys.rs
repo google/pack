@@ -82,7 +82,7 @@ impl Keys {
     ///
     /// # Why shouldn't we always do this?
     ///
-    /// This will hinder you publising updates. Google Play Console updates need
+    /// This will hinder you publishing updates. Google Play Console updates need
     /// to be uploaded using the same signing key as the initial version. So if your
     /// keys are randomly generated, you'll be stuck on v1 forever. Similarly for
     /// updating locally-tested APKs, you'll have to `adb uninstall package.name`
