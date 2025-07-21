@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: cargo build
       - name: Build WASM
-        run: wasm-pack build --target web ./pack-wasm
+        run: wasm-pack build --dev --target web ./pack-wasm
       - name: Run clippy
         run: cargo clippy -- --deny warnings
 
