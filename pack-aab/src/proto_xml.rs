@@ -124,7 +124,7 @@ fn parser_attr_to_proto_attr(
     let mut compiled_value: Option<item::Value> = None;
     let resource_id = if p_attr.name.prefix.clone().unwrap_or("".into()) == "android" {
         // This is an internal attribute
-        let attr_type = infer_attribute_type(&p_attr.name.local_name);
+        let attr_type = infer_attribute_type(&p_attr.value);
         compiled_value = match attr_type {
             AttributeDataType::DecimalInteger => Some(item::Value::Prim(Primitive {
                 oneof_value: Some(primitive::OneofValue::IntDecimalValue(
