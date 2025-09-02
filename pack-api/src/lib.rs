@@ -65,19 +65,17 @@ pub struct Package {
     pub resources: Vec<FileResource>
 }
 
-/// Performs all the steps in packaging an APK.
+/// Performs all the steps in packaging an APK, without signing it.
 ///
 /// This includes:
 ///
 ///  - Compiling resources into `aapt2`'s ResourceChunk format
 ///  - Constructing a 4-byte aligned Zip file with the right compression settings
-///  - Signing the resultant APK with APK Signature Scheme v2 & v3
 ///
-/// Returns: A vector of bytes representing the final APK zip file. For example,
-/// you could flush these to disk or download them from a webpage if called from WASM.
+/// Returns: A vector of bytes representing the final unsigned APK zip file.
 ///
-/// The APK is built and signed in-memory without using the local filesystem.
-pub fn compile_and_sign_apk(package: &Package, keys: &Keys) -> Result<Vec<u8>> {
+/// The APK is built in-memory without using the local filesystem.
+pub fn compile_apk(package: &Package) -> Result<Vec<u8>> {
     let mut resources = vec![];
     // Look for strings.xml and parse it if present
     for res in &package.resources {
@@ -123,6 +121,23 @@ pub fn compile_and_sign_apk(package: &Package, keys: &Keys) -> Result<Vec<u8>> {
     let zip_buf_cursor = Cursor::new(&mut zip_buf);
     pack_zip::zip_apk(&apk_files, zip_buf_cursor)?;
 
+    Ok(zip_buf)
+}
+
+/// Performs all the steps in packaging an APK.
+///
+/// This includes:
+///
+///  - Compiling resources into `aapt2`'s ResourceChunk format
+///  - Constructing a 4-byte aligned Zip file with the right compression settings
+///  - Signing the resultant APK with APK Signature Scheme v2 & v3
+///
+/// Returns: A vector of bytes representing the final APK zip file. For example,
+/// you could flush these to disk or download them from a webpage if called from WASM.
+///
+/// The APK is built and signed in-memory without using the local filesystem.
+pub fn compile_and_sign_apk(package: &Package, keys: &Keys) -> Result<Vec<u8>> {
+    let mut zip_buf = compile_apk(package)?;
     pack_sign::sign_apk_buffer(&mut zip_buf, keys)
 }
 
