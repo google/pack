@@ -175,6 +175,9 @@ and aims to develop further support.
 
 You can help by [contributing](./CONTRIBUTING.md)!
 
+<details>
+  <summary><h3>Compatibility table</h3></summary>
+
 | Original tool | Feature | Supported by pack | Note |
 | ------------- | ------- | ----------------- | ----- |
 | aapt2 | APK Resource tables | ✅ | |
@@ -191,6 +194,8 @@ You can help by [contributing](./CONTRIBUTING.md)!
 | bundletool | AAB XML encoding | ✅ | |
 | bundletool | Resource qualifiers | 🚩 | Same as APK, eg. `values/`, but no `values-b+es/` |
 
+
+</details>
 
 ## License
 
