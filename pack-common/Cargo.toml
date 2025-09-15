@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 deku = "0.19.1"
-xml = "0.8.20"
+xml = "1.0.0"
 zip = { version = "5.1.1", default-features = false, features = ["deflate"] }
 pem = "3.0.5"
 rsa = "0.9.8"
