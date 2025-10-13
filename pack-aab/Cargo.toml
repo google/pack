@@ -9,7 +9,7 @@ pack-common = { path = "../pack-common" }
 pack-zip = { path = "../pack-zip" }
 prost = "0.14.1"
 deku = "0.19.1"
-xml = "0.8.20"
+xml = "1.0.1"
 
 [build-dependencies]
 prost-build = "0.14.1"

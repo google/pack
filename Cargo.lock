@@ -571,7 +571,7 @@ dependencies = [
  "pack-zip",
  "prost",
  "prost-build",
- "xml",
+ "xml 1.0.1",
 ]
 
 [[package]]
@@ -593,7 +593,7 @@ dependencies = [
  "deku",
  "pack-common",
  "phf",
- "xml",
+ "xml 0.8.20",
 ]
 
 [[package]]
@@ -611,7 +611,7 @@ dependencies = [
  "pem",
  "rasn",
  "rsa",
- "xml",
+ "xml 1.0.1",
  "zip",
 ]
 
@@ -1475,6 +1475,12 @@ checksum = "ede1c99c55b4b3ad0349018ef0eccbe954ce9c342334410707ee87177fcf2ab4"
 dependencies = [
  "xml-rs",
 ]
+
+[[package]]
+name = "xml"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "58a4274c410d957424a1502b21126915b45d9956b2f80a88d4f6f906af29facc"
 
 [[package]]
 name = "xml-no-std"
