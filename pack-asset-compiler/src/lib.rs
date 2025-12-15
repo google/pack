@@ -40,7 +40,7 @@ pub fn generate_res_chunk<T: DekuContainerWrite>(
         },
         data: data_bytes
     };
-    if data.header.chunk_size % 4 != 0 {
+    if !data.header.chunk_size.is_multiple_of(4) {
         unimplemented!("Generic chunk alignment ({:?})", data);
     }
     Ok(data)
