@@ -688,7 +688,7 @@ version = "0.1.0"
 dependencies = [
  "deku",
  "pem",
- "rasn",
+ "rasn 0.27.2",
  "rsa",
  "xml",
  "zip",
@@ -705,9 +705,9 @@ dependencies = [
  "pack-zip",
  "pem",
  "rand",
- "rasn",
+ "rasn 0.27.2",
  "rasn-cms",
- "rasn-pkix",
+ "rasn-pkix 0.27.3",
  "rcgen",
  "rsa",
  "sha2",
@@ -982,7 +982,30 @@ dependencies = [
  "num-integer",
  "num-traits",
  "once_cell",
- "rasn-derive",
+ "rasn-derive 0.27.0",
+ "serde_json",
+ "snafu",
+ "xml-no-std",
+]
+
+[[package]]
+name = "rasn"
+version = "0.28.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9081a9e4bfa889ac3d4c5f1329d1802c0d9e89c25b7ca688ce2f97310e49213f"
+dependencies = [
+ "bitvec",
+ "bitvec-nom2",
+ "bytes",
+ "cfg-if",
+ "chrono",
+ "either",
+ "nom",
+ "num-bigint",
+ "num-integer",
+ "num-traits",
+ "once_cell",
+ "rasn-derive 0.28.2",
  "serde_json",
  "snafu",
  "xml-no-std",
@@ -990,12 +1013,12 @@ dependencies = [
 
 [[package]]
 name = "rasn-cms"
-version = "0.27.3"
+version = "0.28.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "884cc78c00763a9456cf2c56c0d775c7ad394920fd8df675f0fa82600b43db3e"
+checksum = "9e39ff1bccc6c9d4c299f8b30f8485e197eb659a4bc08f04ded44813d1096278"
 dependencies = [
- "rasn",
- "rasn-pkix",
+ "rasn 0.28.2",
+ "rasn-pkix 0.28.2",
 ]
 
 [[package]]
@@ -1005,7 +1028,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bf9723b0a85560548db5711650d32a2f10791addc7e998d3a59bdb2a12088d65"
 dependencies = [
  "proc-macro2",
- "rasn-derive-impl",
+ "rasn-derive-impl 0.27.0",
+ "syn",
+]
+
+[[package]]
+name = "rasn-derive"
+version = "0.28.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "33bfba4b924023d83b301ad2c555a99ee70e4a0a2cf65b3cc72bc1615fcc21d6"
+dependencies = [
+ "proc-macro2",
+ "rasn-derive-impl 0.28.2",
  "syn",
 ]
 
@@ -1024,12 +1058,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "rasn-derive-impl"
+version = "0.28.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "14c32e08959f4117a9df9014d6cade57220866050f5d5b9da83f5723fc7eb0b5"
+dependencies = [
+ "either",
+ "itertools",
+ "proc-macro2",
+ "quote",
+ "syn",
+ "uuid",
+]
+
+[[package]]
 name = "rasn-pkix"
 version = "0.27.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ca8f6f4bb1d48645759b1b93c94940d7394d2e549d6c07424edae725bd13ae5"
 dependencies = [
- "rasn",
+ "rasn 0.27.2",
+]
+
+[[package]]
+name = "rasn-pkix"
+version = "0.28.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1f5947272c1c9b5b6144bf840afd2f5f749852f6a5da6585a70ac14051a4e6d6"
+dependencies = [
+ "rasn 0.28.2",
 ]
 
 [[package]]
