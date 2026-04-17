@@ -26,7 +26,7 @@ pub const FIRST_LEVEL_CHUNK_MAGIC: &[u8] = &[0xa5];
 pub const SECOND_LEVEL_CHUNK_MAGIC: &[u8] = &[0x5a];
 
 pub fn compute_top_level_hash(
-    apk_buf: &mut [u8],
+    apk_buf: &[u8],
     offsets: &ZipOffsets,
     signing_block_length: usize
 ) -> Result<Sha256Hash> {
@@ -44,7 +44,7 @@ pub fn compute_top_level_hash(
 }
 
 fn compute_first_level_hashes(
-    apk_buf: &mut [u8],
+    apk_buf: &[u8],
     offsets: &ZipOffsets,
     signing_block_length: usize
 ) -> Result<Vec<Sha256Hash>> {
@@ -72,7 +72,9 @@ fn compute_first_level_hashes(
     first_level_hashes.extend(hash_chunk(chunk4));
 
     let new_cd_start = offsets.cd_start + signing_block_length;
-    let mut cursor = Cursor::new(&mut apk_buf[chunk4_range]);
+
+    let mut chunk4_modified = chunk4.to_vec();
+    let mut cursor = Cursor::new(&mut chunk4_modified);
     cursor.seek(SeekFrom::Start(16))?;
     cursor.write_all(&(new_cd_start as u32).to_le_bytes())?;
 

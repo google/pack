@@ -137,8 +137,8 @@ pub fn compile_apk(package: &Package) -> Result<Vec<u8>> {
 ///
 /// The APK is built and signed in-memory without using the local filesystem.
 pub fn compile_and_sign_apk(package: &Package, keys: &Keys) -> Result<Vec<u8>> {
-    let mut zip_buf = compile_apk(package)?;
-    pack_sign::sign_apk_buffer(&mut zip_buf, keys)
+    let zip_buf = compile_apk(package)?;
+    pack_sign::sign_apk_buffer(&zip_buf, keys)
 }
 
 /// Performs all the steps in packaging an AAB (Android App Bundle).
@@ -192,7 +192,7 @@ pub fn compile_and_sign_aab(package: &Package, keys: &Keys) -> Result<Vec<u8>> {
     pack_zip::zip_apk(&aab_files, aab_buf_cursor)?;
 
     // Sign the AAB with Scheme v2 and v3 (post-zip)
-    pack_sign::sign_apk_buffer(&mut aab_buf, keys)
+    pack_sign::sign_apk_buffer(&aab_buf, keys)
 }
 
 fn parse_manifest(

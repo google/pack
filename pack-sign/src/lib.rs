@@ -34,7 +34,7 @@ mod zip_rebuilder;
 // APK Signature Scheme v3 based on https://source.android.com/docs/security/features/apksigning/v3
 /// Signs a ZIP file buffer, adding an APK Signature Block before its Central Directory.
 /// Can be used for both APK and AAB files.
-pub fn sign_apk_buffer(apk_buf: &mut [u8], keys: &Keys) -> Result<Vec<u8>> {
+pub fn sign_apk_buffer(apk_buf: &[u8], keys: &Keys) -> Result<Vec<u8>> {
     // Dry-run the block to figure out how long it will be given our key
     let dry_run = compute_signing_block([0; 32], keys)?;
     let signing_block_size = dry_run.to_bytes()?.len();
