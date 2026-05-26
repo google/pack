@@ -41,6 +41,13 @@ $ cargo run -p pack-cli ./watchface ./package
 # For custom signing, pass a .pem file as a third CLI argument.
 ```
 
+Build-time manifest overrides can be passed before the input directory:
+
+```sh
+$ cargo run -p pack-cli -- --version-code 42 --version-name 1.0.0 \
+    --rename-manifest-package com.example.watchface ./watchface ./package
+```
+
 </details>
 
 <details>
