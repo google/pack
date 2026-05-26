@@ -14,10 +14,16 @@
 
 use pack_api::{compile_and_sign_aab, compile_and_sign_apk, Keys, PackError, Package, Result};
 use res_dir::read_res_dir;
+use std::io::Cursor;
 use std::path::PathBuf;
 use std::{env, fs};
+use xml::reader::{EventReader, XmlEvent};
 
 pub mod res_dir;
+
+const ANDROID_NAMESPACE: &str = "http://schemas.android.com/apk/res/android";
+const MISSING_VERSION_CODE_WARNING: &str = "AndroidManifest.xml is missing android:versionCode \
+    on its <manifest> element. Android requires a version code for installable APKs.";
 
 /// Run from a watch face directory to build signed APK and AAB files.
 ///
@@ -70,6 +76,10 @@ fn pack_main() -> Result<()> {
     let android_manifest = fs::read(&in_path)?;
     in_path.pop();
 
+    for warning in critical_manifest_warnings(&android_manifest)? {
+        eprintln!("Warning: {warning}");
+    }
+
     in_path.push("res");
     let resources = read_res_dir(&in_path)?;
     in_path.pop();
@@ -89,4 +99,66 @@ fn pack_main() -> Result<()> {
     println!("Compiled, aligned & signed successfully!");
 
     Ok(())
+}
+
+fn critical_manifest_warnings(manifest: &[u8]) -> Result<Vec<&'static str>> {
+    let parser = EventReader::new(Cursor::new(manifest));
+    for event in parser {
+        match event.map_err(PackError::XmlParsingFailed)? {
+            XmlEvent::StartElement {
+                name, attributes, ..
+            } if name.local_name == "manifest" => {
+                let has_version_code = attributes.iter().any(|attr| {
+                    attr.name.local_name == "versionCode"
+                        && attr.name.namespace.as_deref() == Some(ANDROID_NAMESPACE)
+                });
+                return Ok(if has_version_code {
+                    vec![]
+                } else {
+                    vec![MISSING_VERSION_CODE_WARNING]
+                });
+            }
+            XmlEvent::StartElement { .. } => return Ok(vec![]),
+            _ => {}
+        }
+    }
+    Ok(vec![])
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const MANIFEST_WITH_VERSION_CODE: &[u8] = br#"
+        <manifest
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            package="com.example.pack"
+            android:versionCode="1">
+            <application />
+        </manifest>
+    "#;
+
+    const MANIFEST_WITHOUT_VERSION_CODE: &[u8] = br#"
+        <manifest
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            package="com.example.pack">
+            <application />
+        </manifest>
+    "#;
+
+    #[test]
+    fn does_not_warn_when_version_code_is_present() {
+        assert_eq!(
+            critical_manifest_warnings(MANIFEST_WITH_VERSION_CODE).unwrap(),
+            Vec::<&'static str>::new()
+        );
+    }
+
+    #[test]
+    fn warns_when_version_code_is_missing() {
+        assert_eq!(
+            critical_manifest_warnings(MANIFEST_WITHOUT_VERSION_CODE).unwrap(),
+            vec![MISSING_VERSION_CODE_WARNING]
+        );
+    }
 }
