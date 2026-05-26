@@ -680,6 +680,7 @@ name = "pack-cli"
 version = "0.1.0"
 dependencies = [
  "pack-api",
+ "xml",
 ]
 
 [[package]]
